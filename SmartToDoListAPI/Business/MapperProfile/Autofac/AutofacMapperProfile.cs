@@ -17,6 +17,9 @@ namespace SmartToDoListAPI.Business.AutoMapperProfile.Autofac
 
             CreateMap<ToDoItem, ToDoItemDto>();
             CreateMap<ToDoItemDto, ToDoItem>();
+
+            CreateMap<UserDto, User>();
+            CreateMap<User, UserDto>();
         }
     }
 }

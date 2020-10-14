@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Core.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using SmartToDoListAPI.Business.Services.Abstract;
 using SmartToDoListAPI.DataAccess.Abstract;
@@ -12,14 +14,15 @@ using SmartToDoListAPI.Entities.ViewModel;
 namespace SmartToDoListAPI.Controllers
 {
     [ApiController]
+    [Microsoft.AspNetCore.Authorization.Authorize]
     [Route("[controller]")]
     public class ToDoController : ControllerBase
     {
         private readonly IToDoTitleService _toDoTitleService;
         private readonly IToDoTitleDal _toDoTitleDal;
         private readonly IToDoItemService _toDoItemService;
- 
-        public ToDoController(IToDoTitleService toDoTitleService, IToDoItemService toDoItemService,IToDoTitleDal toDoTitleDal)
+
+        public ToDoController(IToDoTitleService toDoTitleService, IToDoItemService toDoItemService, IToDoTitleDal toDoTitleDal)
         {
             _toDoTitleService = toDoTitleService;
             _toDoItemService = toDoItemService;
@@ -30,13 +33,14 @@ namespace SmartToDoListAPI.Controllers
         {
 
             var list = new List<ToDoCardViewModel>();
-
-            var titleList = _toDoTitleService.GetList().Data;
+            var id = ((ClaimsIdentity)User.Identity).GetSpecificClaim(ClaimTypes.NameIdentifier);
+            var titleList = _toDoTitleService.GetList(c => c.UserId==Guid.Parse(id)).Data;
             var itemList = _toDoItemService.GetList().Data;
 
+            
             foreach (var title in titleList)
             {
-                var items =itemList.Where(c => c.ToDoTitleId == title.Id).ToList();
+                var items = itemList.Where(c => c.ToDoTitleId == title.Id).ToList();
 
                 list.Add(new ToDoCardViewModel() { ToDoItem = items, ToDoTitle = title });
             }
@@ -45,10 +49,13 @@ namespace SmartToDoListAPI.Controllers
         }
 
         [HttpPost("save-item")]
+
         public IActionResult SaveItem(ToDoItemDto model)
         {
+       
+            
 
-            if (model.Id==Guid.Empty)
+            if (model.Id == Guid.Empty)
             {
                 model.Id = Guid.NewGuid();
                 _toDoItemService.Add(model);
@@ -68,6 +75,8 @@ namespace SmartToDoListAPI.Controllers
         {
             if (model.Id == Guid.Empty)
             {
+                var id = ((ClaimsIdentity)User.Identity).GetSpecificClaim(ClaimTypes.NameIdentifier);
+                model.UserId = Guid.Parse(id);
                 model.Id = Guid.NewGuid();
                 _toDoTitleService.Add(model);
             }
@@ -96,8 +105,8 @@ namespace SmartToDoListAPI.Controllers
 
             _toDoTitleService.Delete(title);
 
-            
-            
+
+
             return Ok();
 
         }
@@ -115,7 +124,7 @@ namespace SmartToDoListAPI.Controllers
         }
 
         [HttpGet("isDone-item")]
-        public IActionResult IsDoneItem(Guid id,bool isDone)
+        public IActionResult IsDoneItem(Guid id, bool isDone)
         {
 
             var item = _toDoItemService.Get(c => c.Id == id).Data;

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Genel\\Angular\\NewProjects\\Asp.Net Core\\SmartToDoListAPI\\SmartToDoListAPI\\SmartToDoListAPI.csproj": {}
+    "D:\\Genel\\Angular\\NewProjects\\smart-to-do-list-spa-.NetCoreApi\\SmartToDoListAPI\\SmartToDoListAPI.csproj": {}
   },
   "projects": {
-    "D:\\Genel\\Angular\\NewProjects\\Asp.Net Core\\SmartToDoListAPI\\SmartToDoListAPI\\SmartToDoListAPI.csproj": {
+    "D:\\Genel\\Angular\\NewProjects\\smart-to-do-list-spa-.NetCoreApi\\SmartToDoListAPI\\SmartToDoListAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Genel\\Angular\\NewProjects\\Asp.Net Core\\SmartToDoListAPI\\SmartToDoListAPI\\SmartToDoListAPI.csproj",
+        "projectUniqueName": "D:\\Genel\\Angular\\NewProjects\\smart-to-do-list-spa-.NetCoreApi\\SmartToDoListAPI\\SmartToDoListAPI.csproj",
         "projectName": "SmartToDoListAPI",
-        "projectPath": "D:\\Genel\\Angular\\NewProjects\\Asp.Net Core\\SmartToDoListAPI\\SmartToDoListAPI\\SmartToDoListAPI.csproj",
+        "projectPath": "D:\\Genel\\Angular\\NewProjects\\smart-to-do-list-spa-.NetCoreApi\\SmartToDoListAPI\\SmartToDoListAPI.csproj",
         "packagesPath": "C:\\Users\\mahsu\\.nuget\\packages\\",
-        "outputPath": "D:\\Genel\\Angular\\NewProjects\\Asp.Net Core\\SmartToDoListAPI\\SmartToDoListAPI\\obj\\",
+        "outputPath": "D:\\Genel\\Angular\\NewProjects\\smart-to-do-list-spa-.NetCoreApi\\SmartToDoListAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -60,6 +60,10 @@
             "Autofac.Extensions.DependencyInjection": {
               "target": "Package",
               "version": "[7.0.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.0.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",

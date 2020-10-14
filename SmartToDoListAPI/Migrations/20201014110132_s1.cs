@@ -3,27 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SmartToDoListAPI.Migrations
 {
-    public partial class init : Migration
+    public partial class s1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    Id = table.Column<byte[]>(nullable: false),
-                    AddedDate = table.Column<DateTime>(nullable: false),
-                    isDelete = table.Column<int>(nullable: false),
-                    Email = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Surname = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "ToDoTitle",
                 columns: table => new
@@ -38,12 +21,24 @@ namespace SmartToDoListAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ToDoTitle", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ToDoTitle_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    Id = table.Column<byte[]>(nullable: false),
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    isDelete = table.Column<int>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Surname = table.Column<string>(nullable: true),
+                    PasswordSalt = table.Column<byte[]>(nullable: true),
+                    PasswordHash = table.Column<byte[]>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,11 +67,6 @@ namespace SmartToDoListAPI.Migrations
                 name: "IX_ToDoItem_ToDoTitleId",
                 table: "ToDoItem",
                 column: "ToDoTitleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ToDoTitle_UserId",
-                table: "ToDoTitle",
-                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -85,10 +75,10 @@ namespace SmartToDoListAPI.Migrations
                 name: "ToDoItem");
 
             migrationBuilder.DropTable(
-                name: "ToDoTitle");
+                name: "User");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "ToDoTitle");
         }
     }
 }

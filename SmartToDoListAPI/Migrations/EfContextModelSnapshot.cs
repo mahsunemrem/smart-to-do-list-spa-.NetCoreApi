@@ -61,6 +61,10 @@ namespace SmartToDoListAPI.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
+                    b.Property<byte[]>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varbinary(16)");
+
                     b.Property<int>("isDelete")
                         .HasColumnType("int");
 
@@ -84,8 +88,11 @@ namespace SmartToDoListAPI.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("text");
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("varbinary(4000)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("varbinary(4000)");
 
                     b.Property<string>("Surname")
                         .HasColumnType("text");

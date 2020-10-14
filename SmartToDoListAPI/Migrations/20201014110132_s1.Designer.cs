@@ -9,8 +9,8 @@ using SmartToDoListAPI.DataAccess.Concrete.EntityFramework.Contexts;
 namespace SmartToDoListAPI.Migrations
 {
     [DbContext(typeof(EfContext))]
-    [Migration("20200928232227_init")]
-    partial class init
+    [Migration("20201014110132_s1")]
+    partial class s1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -72,8 +72,6 @@ namespace SmartToDoListAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("ToDoTitle");
                 });
 
@@ -92,8 +90,11 @@ namespace SmartToDoListAPI.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("text");
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("varbinary(4000)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("varbinary(4000)");
 
                     b.Property<string>("Surname")
                         .HasColumnType("text");
@@ -111,15 +112,6 @@ namespace SmartToDoListAPI.Migrations
                     b.HasOne("SmartToDoListAPI.Entities.Concrete.ToDoTitle", "ToDoTitle")
                         .WithMany()
                         .HasForeignKey("ToDoTitleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SmartToDoListAPI.Entities.Concrete.ToDoTitle", b =>
-                {
-                    b.HasOne("SmartToDoListAPI.Entities.Concrete.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

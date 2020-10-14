@@ -11,11 +11,9 @@ namespace SmartToDoListAPI.Entities.Concrete
     {
         public string Title { get; set; }
         public string Color { get; set; }
+        [Required]
+        public Guid UserId { get; set; }
 
-        //[Required]
-        //public Guid UserId { get; set; }
-        //[ForeignKey("UserId")]
-        //public virtual User User { get; set; }
 
 
     }

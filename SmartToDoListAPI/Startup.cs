@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Core.Utilities.Security.Encryption;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using SmartToDoListAPI.DataAccess.Concrete.EntityFramework.Contexts;
 
 namespace SmartToDoListAPI
@@ -33,6 +37,27 @@ namespace SmartToDoListAPI
             {
                 options.AddPolicy("AllowOrigin", builder => builder.WithOrigins("http://localhost:4200"));
             });
+
+            //IdentityModelEventSource.ShowPII = true;
+
+            var tokenOptions = Configuration.GetSection("TokenOptions").Get<Core.Utilities.Security.TokenOptions>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidIssuer = tokenOptions.Issuer,
+                    ValidAudience = tokenOptions.Audience,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey),
+                    
+                };
+            });
+
+
 
             //services.AddCors(options =>
             //{
@@ -56,7 +81,7 @@ namespace SmartToDoListAPI
 
 
 
-           // services.AddAutoMapper(typeof(Startup));
+            // services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             //     services.AddDbContext<EfContext>(options =>
             //     services.AddDbContextPool<EfContext>(
@@ -72,6 +97,7 @@ namespace SmartToDoListAPI
         {
             if (env.IsDevelopment())
             {
+               // IdentityModelEventSource.ShowPII = true;
                 app.UseDeveloperExceptionPage();
             }
 
@@ -84,6 +110,7 @@ namespace SmartToDoListAPI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

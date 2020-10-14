@@ -11,7 +11,7 @@ namespace SmartToDoListAPI.Entities.Dtos
         public string Title { get; set; }
         public string Color { get; set; }
 
-        //public Guid UserId { get; set; }
+        public Guid UserId { get; set; }
 
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2q8F17S5oJjkgzKHO1e/RCuyOVkSZLD520pCFZkjvDf1TF6Q7B2fo79/PZOVzi2rmR7HDLc1dvxLD9A8x1B6/A==",
+  "dgSpecHash": "lNGTV+zcXCK1R/k1oJH58+h0gnpLv538qgY926K6APJ5p19EpfM2oDK58fC/DJNcj0Bt+ziMMUJa0U+dJX+beg==",
   "success": true,
-  "projectFilePath": "D:\\Genel\\Angular\\NewProjects\\Asp.Net Core\\SmartToDoListAPI\\SmartToDoListAPI\\SmartToDoListAPI.csproj",
+  "projectFilePath": "D:\\Genel\\Angular\\NewProjects\\smart-to-do-list-spa-.NetCoreApi\\SmartToDoListAPI\\SmartToDoListAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mahsu\\.nuget\\packages\\autofac\\6.0.0\\autofac.6.0.0.nupkg.sha512",
     "C:\\Users\\mahsu\\.nuget\\packages\\autofac.extensions.dependencyinjection\\7.0.1\\autofac.extensions.dependencyinjection.7.0.1.nupkg.sha512",
@@ -14,6 +14,7 @@
     "C:\\Users\\mahsu\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",
     "C:\\Users\\mahsu\\.nuget\\packages\\k4os.compression.lz4.streams\\1.1.11\\k4os.compression.lz4.streams.1.1.11.nupkg.sha512",
     "C:\\Users\\mahsu\\.nuget\\packages\\k4os.hash.xxhash\\1.0.6\\k4os.hash.xxhash.1.0.6.nupkg.sha512",
+    "C:\\Users\\mahsu\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.0.0\\microsoft.aspnetcore.authentication.jwtbearer.3.0.0.nupkg.sha512",
     "C:\\Users\\mahsu\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\mahsu\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
     "C:\\Users\\mahsu\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

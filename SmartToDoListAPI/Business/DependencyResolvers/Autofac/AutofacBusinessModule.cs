@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using SmartToDoListAPI.Business.Services.Abstract;
 using SmartToDoListAPI.Business.Services.Concrete;
+using SmartToDoListAPI.Core.Utilities.Security;
 using SmartToDoListAPI.DataAccess.Abstract;
 using SmartToDoListAPI.DataAccess.Concrete.EntityFramework;
 using SmartToDoListAPI.Entities.Concrete;
@@ -16,6 +17,8 @@ namespace SmartToDoListAPI.Business.DependencyResolvers.Autofac
         protected override void Load(ContainerBuilder builder)
         {
 
+
+            builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<EfToDoTitle>().As<IToDoTitleDal>();
             builder.RegisterType<ToDoTitleManager>().As<IToDoTitleService>();
 
@@ -23,6 +26,12 @@ namespace SmartToDoListAPI.Business.DependencyResolvers.Autofac
             builder.RegisterType<ToDoItemManager>().As<IToDoItemService>();
 
             builder.RegisterType<EfUser>().As<IUserDal>();
+            builder.RegisterType<UserManager>().As<IUserService>();
+
+            
+
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>();
+            //builder.RegisterType<EfUser>().As<IUserDal>();
 
         }
 
